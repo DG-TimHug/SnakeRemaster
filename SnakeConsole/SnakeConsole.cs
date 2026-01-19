@@ -2,38 +2,34 @@
 
 namespace SnakeConsole;
 
-class SnakeConsole
+internal class SnakeConsole
 {
-    static ConsoleSetup setup = new ConsoleSetup();
-    static void Main()
+    private static readonly ConsolePrinter Printer = new ConsolePrinter();
+    private static readonly GameLogic Logic = new GameLogic(Printer);
+    public static void Main()
     {
-        setup.Setup();
-        Print();
+        StartGame();
+        Console.ReadLine(); // -> dass das spielfeld angezeigt wird. Sobald controls kommen, kann ich dass rauchen aber es ist gut genug für den moment :)
     }
 
-    private static void Print()
+    private static void StartGame()
     {
-        foreach (var position in setup.Border)
-        {
-            
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.SetCursorPosition(position.x, position.y);
-            Console.Write("#");
-        }
+        Console.CursorVisible = false;
+        GameLogic.Height = 16; //Will be defined by user at some point :)
+        GameLogic.Width = 16;
+        Logic.Setup();
     }
 }
 
-public class ConsoleSetup : GameLogic.IGameBoardPrinter
+public class ConsolePrinter : Interfaces.IGameRenderer
 {
-    public List<Position> Border { get; set; } = new ();
-    
-    private GameLogic logic = new GameLogic();
-    
-    public void Setup()
+    public void Border(List<Position> border)
     {
-        logic.Height = 16;
-        logic.Width = 16;
-        logic.Setup();
-        Border = logic.Border;
+        foreach (var position in border)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.SetCursorPosition(position.y, position.x);
+            Console.Write("#");
+        }
     }
 }
