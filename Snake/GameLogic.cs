@@ -11,7 +11,7 @@ public class GameLogic : GameLogic.IGameBoardPrinter
     public int Width { get; set; }  
     public int Height { get; set; }
     public bool IsGameAlive = false;
-    Board board = new Board();
+    Board board = new ();
 
     public void Setup()
     {

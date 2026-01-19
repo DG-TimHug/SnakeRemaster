@@ -4,14 +4,21 @@ namespace SnakeConsole;
 
 class SnakeConsole
 {
+    static ConsoleSetup setup = new ConsoleSetup();
     static void Main()
     {
-        ConsoleSetup setup = new ConsoleSetup();
         setup.Setup();
+        Print();
+    }
 
+    private static void Print()
+    {
         foreach (var position in setup.Border)
         {
-            Console.WriteLine($"X={position.X}, Y={position.Y}");
+            
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.SetCursorPosition(position.x, position.y);
+            Console.Write("#");
         }
     }
 }
