@@ -1,28 +1,38 @@
-using System.Timers;
-using Timer = System.Threading.Timer;
-
 namespace Snake;
 
-public class GameLogic
+public class GameLogic : GameLogic.IGameBoardPrinter
 {
-    public System.Timers.Timer GameTimer = new (150);
     public interface IGameBoardPrinter
     {
         List<Position> Border { get; set; }
     }
 
+    public List<Position> Border { get; set; } = new();
+    public int Width { get; set; }  
+    public int Height { get; set; }
+    public bool IsGameAlive = false;
+    Board board = new Board();
+
+    public void Setup()
+    {
+        System.Timers.Timer gameTimer = new (150);
+        
+        board.CalculateBorder(Height, Width);
+        Border = board.Border;
+        //gameTimer.Elapsed += (_,_) =>
+        //{
+        //     if (!isGameAlive)
+        //     {
+        //         //TODO: GameOver Mechanic
+        //         return;
+        //     }
+        //     GameLoop();
+        //};
+        //gameTimer.Start();
+    }
+    
     public void GameLoop()
     {
         
-    }
-}
-
-public class GameBoardPrinter : GameLogic.IGameBoardPrinter
-{
-    public List<Position> Border { get; set; }
-    
-    public void SetData()
-    {
-        Border = Board.border;
     }
 }
