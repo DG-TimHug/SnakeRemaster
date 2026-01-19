@@ -2,13 +2,13 @@ namespace Snake;
 
 public class Board
 {
-    private List<Position> border;
+    internal static List<Position> border;
     public bool IsPositionOnBorder(Position pos)
     {
        return border.Contains(pos);
     }
 
-    public void BorderStuff(int height, int width)
+    public void CalculateBorder(int height, int width)
     {
         
         for (int row = 0; row < height; row++)
@@ -17,8 +17,8 @@ public class Board
             {
                 if (row == 0 || row == height - 1 || col == 0 || col == width - 1)
                 {
-                    Position newborderpos = new Position(row, col);
-                    border.Add(newborderpos);
+                    Position newBorderPosition = new Position(row, col);
+                    border.Add(newBorderPosition);
                 }
             }
             
