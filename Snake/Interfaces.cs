@@ -1,6 +1,6 @@
 namespace Snake;
 
-public class Interfaces
+public static class Interfaces
 {
     public interface IGameRenderer
     {

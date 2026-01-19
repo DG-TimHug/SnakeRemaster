@@ -2,11 +2,11 @@ namespace Snake;
 
 public class GameLogic(Interfaces.IGameRenderer renderer)
 {
-    public static List<Position> Border = new();
+    public static readonly List<Position> Border = new();
     public static int Width { get; set; }  
     public static int Height { get; set; }
     private bool isGameAlive;
-    Board board = new ();
+    private readonly Board board = new ();
 
     public void Setup()
     {
