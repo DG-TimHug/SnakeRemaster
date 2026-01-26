@@ -2,12 +2,12 @@ namespace Snake;
 
 public class Board 
 {
-    public bool IsPositionOnBorder(Position pos)
+    public Board(int height, int width)
     {
-       return GameLogic.Border.Contains(pos);
+        CalculateBorder(height, width);
     }
-
-    public void CalculateBorder(int height, int width)
+    
+    private void CalculateBorder(int height, int width)
     {
        // TODO: More efficient way of calculating border
         for (int row = 0; row < height; row++)
@@ -16,8 +16,7 @@ public class Board
             {
                 if (row == 0 || row == height - 1 || col == 0 || col == width - 1)
                 {
-                    Position newBorderPosition = new Position(row, col);
-                    GameLogic.Border.Add(newBorderPosition);
+                    GameLogic.Border.Add(new Position(row, col));
                 }
             }
             

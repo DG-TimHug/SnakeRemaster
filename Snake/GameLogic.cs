@@ -1,21 +1,25 @@
 namespace Snake;
 
-public class GameLogic(Interfaces.IGameRenderer renderer)
+public class GameLogic
 {
-    public static readonly List<Position> Border = new();
-    public static int Width { get; set; }  
-    public static int Height { get; set; }
-    private bool isGameAlive;
-    private readonly Board board = new ();
-
-    public void Setup()
+    public GameLogic(IGameRenderer renderer, int height, int width)
     {
-        isGameAlive = true;
+        this.renderer = renderer;
+        board = new Board(height, width);
+    }
+    
+    private readonly IGameRenderer renderer;
+    private readonly Board board;
+    public static readonly List<Position> Border = new();
+    private bool isGameOver;
+
+    public void Start()
+    {
+        isGameOver = false;
         System.Timers.Timer gameTimer = new (150);
-        board.CalculateBorder(Height, Width);
         gameTimer.Elapsed += (_,_) =>
         {
-             if (!isGameAlive)
+             if (isGameOver)
              {
                  gameTimer.Stop();
                  gameTimer.Dispose();
@@ -29,13 +33,5 @@ public class GameLogic(Interfaces.IGameRenderer renderer)
     private void GameLoop()
     {
         renderer.Border(Border);
-    }
-
-    public void Over()
-    {
-        if (!isGameAlive)
-        {
-            Console.WriteLine("Game Over!");
-        }
     }
 }

@@ -5,7 +5,7 @@ namespace SnakeConsole;
 internal class SnakeConsole
 {
     private static readonly ConsolePrinter Printer = new();
-    private static readonly GameLogic Logic = new(Printer);
+
     public static void Main()
     {
         StartGame();
@@ -15,21 +15,10 @@ internal class SnakeConsole
     private static void StartGame()
     {
         Console.CursorVisible = false;
-        GameLogic.Height = 16; //Will be defined by user at some point :)
-        GameLogic.Width = 16;
-        Logic.Setup();
-    }
-}
+        int height = 20;
+        int width = 20;
 
-public class ConsolePrinter : Interfaces.IGameRenderer
-{
-    public void Border(List<Position> border)
-    {
-        foreach (var position in border)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.SetCursorPosition(position.Y, position.X);
-            Console.Write("#");
-        }
+        var logic = new GameLogic(Printer, height, width);
+        logic.Start();
     }
 }
