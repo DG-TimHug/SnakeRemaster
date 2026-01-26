@@ -13,11 +13,13 @@ public class GameLogic
     private readonly Snake snake = new();
     public static readonly List<Position> Border = new();
     private bool isGameOver;
+    private bool firstRender;
 
     public void Start()
     {
         isGameOver = false;
-        System.Timers.Timer gameTimer = new (150);
+        System.Timers.Timer gameTimer = new (230);
+        firstRender = true;
         gameTimer.Elapsed += (_,_) =>
         {
              if (isGameOver)
@@ -33,7 +35,10 @@ public class GameLogic
 
     private void GameLoop()
     {
+        Console.Clear();
+        
         renderer.Border(Border);
+        snake.Move();
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body);
     }
