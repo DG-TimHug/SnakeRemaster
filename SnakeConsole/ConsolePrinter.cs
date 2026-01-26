@@ -18,16 +18,16 @@ public class ConsolePrinter : IGameRenderer
     {
         foreach (var position in body)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.SetCursorPosition(position.Y, position.X);
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.SetCursorPosition(position.X, position.Y);
             Console.Write("o");
         }
     }
 
     public void SnakeHead(Position head)
     {
-        Console.ForegroundColor = ConsoleColor.Blue;
-        Console.SetCursorPosition(head.Y, head.X);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.SetCursorPosition(head.X, head.Y);
         Console.Write("0");
     }
 }

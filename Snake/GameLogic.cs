@@ -34,7 +34,7 @@ public class GameLogic
     private void GameLoop()
     {
         renderer.Border(Border);
-        renderer.SnakeBody(snake.Body);
         renderer.SnakeHead(snake.Head);
+        renderer.SnakeBody(snake.Body);
     }
 }
