@@ -2,7 +2,7 @@
 
 namespace SnakeConsole;
 
-internal class SnakeConsole
+internal abstract class SnakeConsole
 {
     private static readonly ConsolePrinter Printer = new();
 
@@ -16,8 +16,7 @@ internal class SnakeConsole
     {
         Console.CursorVisible = false;
         int height = 20;
-        int width = 20;
-
+        int width = 40;
         var logic = new GameLogic(Printer, height, width);
         logic.Start();
     }

@@ -10,6 +10,7 @@ public class GameLogic
     
     private readonly IGameRenderer renderer;
     private readonly Board board;
+    private readonly Snake snake = new();
     public static readonly List<Position> Border = new();
     private bool isGameOver;
 
@@ -33,5 +34,7 @@ public class GameLogic
     private void GameLoop()
     {
         renderer.Border(Border);
+        renderer.SnakeHead(snake.Head);
+        renderer.SnakeBody(snake.Body);
     }
 }
