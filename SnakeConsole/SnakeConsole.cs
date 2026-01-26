@@ -2,7 +2,7 @@
 
 namespace SnakeConsole;
 
-internal class SnakeConsole
+internal abstract class SnakeConsole
 {
     private static readonly ConsolePrinter Printer = new();
 

@@ -2,6 +2,6 @@ namespace Snake;
 
 public class Snake
 {
-    public static readonly List<Position> Body = new();
-    public Position Head = new(5, 7);
+    public readonly List<Position> Body = new();
+    public Position Head { get; set;} = new(10, 5);
 }
