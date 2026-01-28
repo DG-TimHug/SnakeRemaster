@@ -9,34 +9,6 @@ internal abstract class SnakeConsole
     public static void Main()
     {
         StartGame();
-        if (Console.KeyAvailable)
-        {
-            var key = Console.ReadKey(true).Key;
-            switch (key)
-            {
-                case ConsoleKey.W:
-                {
-                    GameLogic.CurrentDirection = GameLogic.Direction.Up;
-                    break;
-                        
-                }
-                case ConsoleKey.A:
-                {
-                    GameLogic.CurrentDirection = GameLogic.Direction.Left; 
-                    break;
-                }
-                case ConsoleKey.S:
-                {
-                    GameLogic.CurrentDirection = GameLogic.Direction.Down;
-                    break;
-                }
-                case ConsoleKey.D:
-                {
-                    GameLogic.CurrentDirection = GameLogic.Direction.Right;
-                    break;
-                }
-            }
-        }
     }
 
     private static void StartGame()
@@ -46,5 +18,28 @@ internal abstract class SnakeConsole
         int width = 40;
         var logic = new GameLogic(Printer, height, width);
         logic.Start();
+        
+        while (true)
+        {
+            if (Console.KeyAvailable)
+            {
+                var key = Console.ReadKey(true).Key;
+
+                var dir = key switch
+                {
+                    ConsoleKey.W => GameLogic.Direction.Up,
+                    ConsoleKey.A => GameLogic.Direction.Left,
+                    ConsoleKey.S => GameLogic.Direction.Down,
+                    ConsoleKey.D => GameLogic.Direction.Right,
+                    _ => (GameLogic.Direction?)null
+                };
+
+                if (dir.HasValue)
+                {
+                     logic.SetDirection(dir.Value);
+                }
+            }
+
+        }
     }
 }
