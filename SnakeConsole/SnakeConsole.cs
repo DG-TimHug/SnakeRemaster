@@ -9,36 +9,34 @@ internal abstract class SnakeConsole
     public static void Main()
     {
         StartGame();
-        /*
         if (Console.KeyAvailable)
         {
             var key = Console.ReadKey(true).Key;
             switch (key)
             {
-                case ConsoleKey.W: 
+                case ConsoleKey.W:
                 {
-                    GameLogic.DirectionNumber
+                    GameLogic.CurrentDirection = GameLogic.Direction.Up;
                     break;
                         
                 }
                 case ConsoleKey.A:
                 {
-                    game.SetDirection(Direction.Left); 
+                    GameLogic.CurrentDirection = GameLogic.Direction.Left; 
                     break;
                 }
                 case ConsoleKey.S:
                 {
-                    game.SetDirection(Direction.Down);
+                    GameLogic.CurrentDirection = GameLogic.Direction.Down;
                     break;
                 }
                 case ConsoleKey.D:
                 {
-                    game.SetDirection(Direction.Right); 
+                    GameLogic.CurrentDirection = GameLogic.Direction.Right;
                     break;
                 }
             }
-        }*/
-        Console.ReadLine();
+        }
     }
 
     private static void StartGame()

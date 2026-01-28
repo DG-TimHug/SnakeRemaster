@@ -14,7 +14,15 @@ public class GameLogic
     public static readonly List<Position> Border = new();
     private bool isGameOver;
     private bool firstRender;
-    public int DirectionNumber;
+    public static Direction CurrentDirection;
+
+    public enum Direction
+    {
+        Left,   
+        Right,
+        Up,
+        Down
+    }
 
     public void Start()
     {
@@ -39,7 +47,7 @@ public class GameLogic
         Console.Clear();
         
         renderer.Border(Border);
-        snake.Move();
+        snake.Move(CurrentDirection);
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body);
     }
