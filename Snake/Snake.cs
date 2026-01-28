@@ -19,11 +19,11 @@ public class Snake
         Body.Add(new Position(3, 4));
     }
     
-    public void Move(GameLogic.Direction currentDirection)
+    public void Move(GameLogic.Direction newDirection)
     {
         Position oldHead = Head;
 
-        ChangeDirection(currentDirection);
+        ChangeDirection(newDirection);
 
         Body.Insert(0, oldHead);
         
@@ -32,9 +32,9 @@ public class Snake
         Body.RemoveAt(Body.Count - 1);
     }
 
-    private void ChangeDirection(GameLogic.Direction currentDirection)
+    private void ChangeDirection(GameLogic.Direction newDirection)
     {
-        switch (currentDirection)
+        switch (newDirection)
         {
             case GameLogic.Direction.Right:
             {

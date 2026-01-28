@@ -12,7 +12,6 @@ public class GameLogic
     private readonly Board board;
     private readonly Snake snake = new();
     private Direction currentDirection = Direction.Right;
-
     public enum Direction
     {
         Left,   
@@ -23,7 +22,7 @@ public class GameLogic
 
     public void Start()
     {
-        System.Timers.Timer gameTimer = new (230);
+        System.Timers.Timer gameTimer = new (170);
         gameTimer.Elapsed += (_,_) =>
         {
              GameLoop();
@@ -31,9 +30,14 @@ public class GameLogic
         gameTimer.Start();
     }
     
-    public void SetDirection(Direction dir)
+    public void SetDirection(Direction newDir)
     {
-        currentDirection = dir;
+        if (IsOpposite(currentDirection, newDir))
+        {
+             return;
+        }
+           
+        currentDirection = newDir;
     }
     
     private void GameLoop()
@@ -44,4 +48,13 @@ public class GameLogic
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body);
     }
+    
+    private bool IsOpposite(Direction currentDir, Direction newDir)
+    {
+        return (currentDir == Direction.Left && newDir == Direction.Right) ||
+               (currentDir == Direction.Right && newDir == Direction.Left) ||
+               (currentDir == Direction.Up && newDir == Direction.Down) ||
+               (currentDir == Direction.Down && newDir == Direction.Up);
+    }
+
 }
