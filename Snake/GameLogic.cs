@@ -14,6 +14,7 @@ public class GameLogic
     public static readonly List<Position> Border = new();
     private bool isGameOver;
     private bool firstRender;
+    public int DirectionNumber;
 
     public void Start()
     {

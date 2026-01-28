@@ -9,7 +9,36 @@ internal abstract class SnakeConsole
     public static void Main()
     {
         StartGame();
-        Console.ReadLine(); // -> dass das spielfeld angezeigt wird. Sobald controls kommen, kann ich dass rauchen aber es ist gut genug für den moment :)
+        /*
+        if (Console.KeyAvailable)
+        {
+            var key = Console.ReadKey(true).Key;
+            switch (key)
+            {
+                case ConsoleKey.W: 
+                {
+                    GameLogic.DirectionNumber
+                    break;
+                        
+                }
+                case ConsoleKey.A:
+                {
+                    game.SetDirection(Direction.Left); 
+                    break;
+                }
+                case ConsoleKey.S:
+                {
+                    game.SetDirection(Direction.Down);
+                    break;
+                }
+                case ConsoleKey.D:
+                {
+                    game.SetDirection(Direction.Right); 
+                    break;
+                }
+            }
+        }*/
+        Console.ReadLine();
     }
 
     private static void StartGame()

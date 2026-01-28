@@ -23,12 +23,43 @@ public class Snake
     {
         Position oldHead = Head;
 
-        Head = new Position(Head.X + 1, Head.Y);
+        ChangeDirection(20);
 
         Body.Insert(0, oldHead);
         
         RemovedTail = Body[^1];
 
         Body.RemoveAt(Body.Count - 1);
+    }
+
+    public void ChangeDirection(int direction)
+    {
+        switch (direction)
+        {
+            case 10:
+            {
+                //Set Direction right
+                Head = new Position(Head.X + 1, Head.Y);
+                break;
+            }
+            case 20:
+            {
+                //Direction UP
+                Head = new Position(Head.X, Head.Y + 1);
+                break;
+            }
+            case 30:
+            {
+                //direction left
+                Head = new Position(Head.X -1, Head.Y);
+                break;
+            }
+            case 40:
+            {
+                //direction down
+                Head = new Position(Head.X, Head.Y - 1);
+                break;
+            }
+        }
     }
 }
