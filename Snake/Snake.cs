@@ -38,26 +38,28 @@ public class Snake
         {
             case GameLogic.Direction.Right:
             {
-                //Set Direction right
                 Head = new Position(Head.X + 1, Head.Y);
                 break;
             }
             case GameLogic.Direction.Up:
             {
-                //Direction UP
                 Head = new Position(Head.X, Head.Y - 1);
                 break;
             }
             case GameLogic.Direction.Left:
             {
-                //direction left
                 Head = new Position(Head.X -1, Head.Y);
                 break;
             }
             case GameLogic.Direction.Down:
             {
-                //direction down
                 Head = new Position(Head.X, Head.Y + 1);
+                break;
+            }
+
+            default:
+            {
+                Head = new Position(Head.X + 1, Head.Y);
                 break;
             }
         }
