@@ -67,5 +67,6 @@ public class GameLogic
     {
         gameTimer.Dispose();
         Console.WriteLine("Game Over!");
+        
     }
 }
