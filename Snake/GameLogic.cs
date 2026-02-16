@@ -1,3 +1,5 @@
+using Timer = System.Timers.Timer;
+
 namespace Snake;
 
 public class GameLogic
@@ -7,14 +9,16 @@ public class GameLogic
         this.renderer = renderer;
         board = new Board(height, width);
     }
-    
+
     private readonly IGameRenderer renderer;
     private readonly Board board;
     private readonly Snake snake = new();
     private Direction currentDirection = Direction.Right;
+    private System.Timers.Timer gameTimer;
+
     public enum Direction
     {
-        Left,   
+        Left,
         Right,
         Up,
         Down
@@ -22,33 +26,31 @@ public class GameLogic
 
     public void Start()
     {
-        System.Timers.Timer gameTimer = new (170);
-        gameTimer.Elapsed += (_,_) =>
-        {
-             GameLoop();
-        };
+        gameTimer = new Timer(170);
+        gameTimer.Elapsed += (_, _) => { GameLoop(); };
         gameTimer.Start();
     }
-    
+
     public void SetDirection(Direction newDir)
     {
         if (IsOpposite(currentDirection, newDir))
         {
-             return;
+            return;
         }
-           
+
         currentDirection = newDir;
     }
-    
+
     private void GameLoop()
     {
         Console.Clear();
         renderer.Border(board.Border);
         snake.Move(currentDirection);
+        Checks();
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body);
     }
-    
+
     private bool IsOpposite(Direction currentDir, Direction newDir)
     {
         return (currentDir == Direction.Left && newDir == Direction.Right) ||
@@ -57,4 +59,17 @@ public class GameLogic
                (currentDir == Direction.Down && newDir == Direction.Up);
     }
 
+    public void Checks()
+    {
+        if (snake.IsSnakeInSelf(snake.Head))
+        {
+            EndGame();
+        }
+    }
+
+    public void EndGame()
+    {
+        gameTimer.Dispose();
+        Console.WriteLine("Game Over!");
+    }
 }

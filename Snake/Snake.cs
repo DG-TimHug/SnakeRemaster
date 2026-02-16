@@ -17,6 +17,8 @@ public class Snake
 
         Body.Add(new Position(4, 4));
         Body.Add(new Position(3, 4));
+        Body.Add(new Position(2, 4));
+        Body.Add(new Position(1, 4));
     }
     
     public void Move(GameLogic.Direction newDirection)
@@ -63,5 +65,10 @@ public class Snake
                 break;
             }
         }
+    }
+
+    public bool IsSnakeInSelf(Position pos)
+    {
+        return Body.Contains(pos);
     }
 }
