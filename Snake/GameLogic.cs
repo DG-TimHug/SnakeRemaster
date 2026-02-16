@@ -1,5 +1,4 @@
 using Timer = System.Timers.Timer;
-
 namespace Snake;
 
 public class GameLogic
