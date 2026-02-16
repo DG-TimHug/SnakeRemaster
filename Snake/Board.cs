@@ -18,10 +18,15 @@ public class Board
             {
                 if (row == 0 || row == height - 1 || col == 0 || col == width - 1)
                 {
-                    Border.Add(new Position(row, col));
+                    Border.Add(new Position(col, row));
                 }
             }
             
         }
+    }
+
+    public bool IsPosOnBorder(Position pos)
+    {
+        return Border.Contains(pos);
     }
 }

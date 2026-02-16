@@ -9,8 +9,7 @@ public class Snake
     public readonly List<Position> Body = new();
     public Position Head { get; set;} = new (5,4);
     public Position RemovedTail { get; set; }
-
-    public Direction CurrentDirection = Direction.Right;
+    public Direction CurrentDirection { get; set; } = Direction.Right;
 
     private void SetInitialLength()
     {
