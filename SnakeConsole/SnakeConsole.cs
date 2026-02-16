@@ -27,11 +27,11 @@ internal abstract class SnakeConsole
 
                 var dir = key switch
                 {
-                    ConsoleKey.W => GameLogic.Direction.Up,
-                    ConsoleKey.A => GameLogic.Direction.Left,
-                    ConsoleKey.S => GameLogic.Direction.Down,
-                    ConsoleKey.D => GameLogic.Direction.Right,
-                    _ => (GameLogic.Direction?)null
+                    ConsoleKey.W => Snake.Snake.Direction.Up,
+                    ConsoleKey.A => Snake.Snake.Direction.Left,
+                    ConsoleKey.S => Snake.Snake.Direction.Down,
+                    ConsoleKey.D => Snake.Snake.Direction.Right,
+                    _ => (Snake.Snake.Direction?)null
                 };
 
                 if (dir.HasValue)

@@ -8,8 +8,9 @@ public class Snake
     }
     public readonly List<Position> Body = new();
     public Position Head { get; set;} = new (5,4);
-    
     public Position RemovedTail { get; set; }
+
+    public Direction currentDirection = Direction.Right;
 
     private void SetInitialLength()
     {
@@ -19,11 +20,23 @@ public class Snake
         Body.Add(new Position(3, 4));
     }
     
-    public void Move(GameLogic.Direction currentDirection)
+    public enum Direction
+    {
+        Left,   
+        Right,
+        Up,
+        Down
+    }
+    public void SetDirection(Direction dir)
+    {
+        currentDirection = dir;
+    }
+    
+    public void Move()
     {
         Position oldHead = Head;
 
-        ChangeDirection(currentDirection);
+        ChangeDirection();
 
         Body.Insert(0, oldHead);
         
@@ -32,26 +45,26 @@ public class Snake
         Body.RemoveAt(Body.Count - 1);
     }
 
-    private void ChangeDirection(GameLogic.Direction currentDirection)
+    private void ChangeDirection()
     {
         switch (currentDirection)
         {
-            case GameLogic.Direction.Right:
+            case Direction.Right:
             {
                 Head = new Position(Head.X + 1, Head.Y);
                 break;
             }
-            case GameLogic.Direction.Up:
+            case Direction.Up:
             {
                 Head = new Position(Head.X, Head.Y - 1);
                 break;
             }
-            case GameLogic.Direction.Left:
+            case Direction.Left:
             {
                 Head = new Position(Head.X -1, Head.Y);
                 break;
             }
-            case GameLogic.Direction.Down:
+            case Direction.Down:
             {
                 Head = new Position(Head.X, Head.Y + 1);
                 break;

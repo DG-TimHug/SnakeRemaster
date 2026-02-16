@@ -11,15 +11,7 @@ public class GameLogic
     private readonly IGameRenderer renderer;
     private readonly Board board;
     private readonly Snake snake = new();
-    private Direction currentDirection = Direction.Right;
-
-    public enum Direction
-    {
-        Left,   
-        Right,
-        Up,
-        Down
-    }
+    
 
     public void Start()
     {
@@ -31,16 +23,16 @@ public class GameLogic
         gameTimer.Start();
     }
     
-    public void SetDirection(Direction dir)
+    public void SetDirection(Snake.Direction dir)
     {
-        currentDirection = dir;
+        snake.currentDirection = dir;
     }
     
     private void GameLoop()
     {
         Console.Clear();
         renderer.Border(board.Border);
-        snake.Move(currentDirection);
+        snake.Move();
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body);
     }
