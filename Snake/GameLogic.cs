@@ -25,6 +25,11 @@ public class GameLogic
     
     public void SetDirection(Direction dir)
     {
+        if (IsOpposite(snake.CurrentDirection, dir))
+        {
+            return;
+        }
+
         snake.CurrentDirection = dir;
     }
     
