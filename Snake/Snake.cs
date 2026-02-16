@@ -8,8 +8,9 @@ public class Snake
     }
     public readonly List<Position> Body = new();
     public Position Head { get; set;} = new (5,4);
-    
     public Position RemovedTail { get; set; }
+
+    public Direction CurrentDirection = Direction.Right;
 
     private void SetInitialLength()
     {
@@ -21,11 +22,19 @@ public class Snake
         Body.Add(new Position(1, 4));
     }
     
-    public void Move(GameLogic.Direction newDirection)
+    
+    public void Move()
     {
         Position oldHead = Head;
 
-        ChangeDirection(newDirection);
+        Head = CurrentDirection switch
+        {
+            Direction.Right => new Position(Head.X + 1, Head.Y),
+            Direction.Up => new Position(Head.X, Head.Y - 1),
+            Direction.Left => new Position(Head.X - 1, Head.Y), 
+            Direction.Down => new Position(Head.X, Head.Y + 1),
+            _ => new Position(Head.X + 1, Head.Y)
+        };
 
         Body.Insert(0, oldHead);
         
@@ -33,42 +42,17 @@ public class Snake
 
         Body.RemoveAt(Body.Count - 1);
     }
-
-    private void ChangeDirection(GameLogic.Direction newDirection)
-    {
-        switch (newDirection)
-        {
-            case GameLogic.Direction.Right:
-            {
-                Head = new Position(Head.X + 1, Head.Y);
-                break;
-            }
-            case GameLogic.Direction.Up:
-            {
-                Head = new Position(Head.X, Head.Y - 1);
-                break;
-            }
-            case GameLogic.Direction.Left:
-            {
-                Head = new Position(Head.X -1, Head.Y);
-                break;
-            }
-            case GameLogic.Direction.Down:
-            {
-                Head = new Position(Head.X, Head.Y + 1);
-                break;
-            }
-
-            default:
-            {
-                Head = new Position(Head.X + 1, Head.Y);
-                break;
-            }
-        }
-    }
-
     public bool IsSnakeInSelf(Position pos)
     {
         return Body.Contains(pos);
     }
+}
+
+public enum Direction
+{
+    Left,   
+    Right,
+    Up,
+    Down
+    
 }
