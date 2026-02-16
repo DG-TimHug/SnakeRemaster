@@ -11,33 +11,27 @@ public class GameLogic
     private readonly IGameRenderer renderer;
     private readonly Board board;
     private readonly Snake snake = new();
-    public static readonly List<Position> Border = new();
-    private bool isGameOver;
-    private bool firstRender;
+    
 
     public void Start()
     {
-        isGameOver = false;
         System.Timers.Timer gameTimer = new (230);
-        firstRender = true;
         gameTimer.Elapsed += (_,_) =>
         {
-             if (isGameOver)
-             {
-                 gameTimer.Stop();
-                 gameTimer.Dispose();
-                 return;
-             }
              GameLoop();
         };
         gameTimer.Start();
     }
-
+    
+    public void SetDirection(Direction dir)
+    {
+        snake.CurrentDirection = dir;
+    }
+    
     private void GameLoop()
     {
         Console.Clear();
-        
-        renderer.Border(Border);
+        renderer.Border(board.Border);
         snake.Move();
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body);

@@ -7,6 +7,8 @@ public class Board
         CalculateBorder(height, width);
     }
     
+    public readonly List<Position> Border = new();
+    
     private void CalculateBorder(int height, int width)
     {
        // TODO: More efficient way of calculating border
@@ -16,7 +18,7 @@ public class Board
             {
                 if (row == 0 || row == height - 1 || col == 0 || col == width - 1)
                 {
-                    GameLogic.Border.Add(new Position(row, col));
+                    Border.Add(new Position(row, col));
                 }
             }
             

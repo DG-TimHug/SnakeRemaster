@@ -9,7 +9,6 @@ internal abstract class SnakeConsole
     public static void Main()
     {
         StartGame();
-        Console.ReadLine(); // -> dass das spielfeld angezeigt wird. Sobald controls kommen, kann ich dass rauchen aber es ist gut genug für den moment :)
     }
 
     private static void StartGame()
@@ -19,5 +18,28 @@ internal abstract class SnakeConsole
         int width = 40;
         var logic = new GameLogic(Printer, height, width);
         logic.Start();
+        
+        while (true)
+        {
+            if (Console.KeyAvailable)
+            {
+                var key = Console.ReadKey(true).Key;
+
+                var dir = key switch
+                {
+                    ConsoleKey.W => Direction.Up,
+                    ConsoleKey.A => Direction.Left,
+                    ConsoleKey.S => Direction.Down,
+                    ConsoleKey.D => Direction.Right,
+                    _ => (Direction?)null
+                };
+
+                if (dir.HasValue)
+                {
+                     logic.SetDirection(dir.Value);
+                }
+            }
+
+        }
     }
 }
