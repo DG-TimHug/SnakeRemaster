@@ -10,7 +10,7 @@ public class Snake
     public Position Head { get; set;} = new (5,4);
     public Position RemovedTail { get; set; }
 
-    public Direction currentDirection = Direction.Right;
+    public Direction CurrentDirection = Direction.Right;
 
     private void SetInitialLength()
     {
@@ -20,23 +20,19 @@ public class Snake
         Body.Add(new Position(3, 4));
     }
     
-    public enum Direction
-    {
-        Left,   
-        Right,
-        Up,
-        Down
-    }
-    public void SetDirection(Direction dir)
-    {
-        currentDirection = dir;
-    }
     
     public void Move()
     {
         Position oldHead = Head;
 
-        ChangeDirection();
+        Head = CurrentDirection switch
+        {
+            Direction.Right => new Position(Head.X + 1, Head.Y),
+            Direction.Up => new Position(Head.X, Head.Y - 1),
+            Direction.Left => new Position(Head.X - 1, Head.Y), 
+            Direction.Down => new Position(Head.X, Head.Y + 1),
+            _ => new Position(Head.X + 1, Head.Y)
+        };
 
         Body.Insert(0, oldHead);
         
@@ -44,37 +40,12 @@ public class Snake
 
         Body.RemoveAt(Body.Count - 1);
     }
+}
 
-    private void ChangeDirection()
-    {
-        switch (currentDirection)
-        {
-            case Direction.Right:
-            {
-                Head = new Position(Head.X + 1, Head.Y);
-                break;
-            }
-            case Direction.Up:
-            {
-                Head = new Position(Head.X, Head.Y - 1);
-                break;
-            }
-            case Direction.Left:
-            {
-                Head = new Position(Head.X -1, Head.Y);
-                break;
-            }
-            case Direction.Down:
-            {
-                Head = new Position(Head.X, Head.Y + 1);
-                break;
-            }
-
-            default:
-            {
-                Head = new Position(Head.X + 1, Head.Y);
-                break;
-            }
-        }
-    }
+public enum Direction
+{
+    Left,   
+    Right,
+    Up,
+    Down
 }

@@ -23,9 +23,9 @@ public class GameLogic
         gameTimer.Start();
     }
     
-    public void SetDirection(Snake.Direction dir)
+    public void SetDirection(Direction dir)
     {
-        snake.currentDirection = dir;
+        snake.CurrentDirection = dir;
     }
     
     private void GameLoop()
