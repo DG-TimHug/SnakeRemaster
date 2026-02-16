@@ -13,11 +13,15 @@ public class GameLogic
     private readonly Board board;
     private readonly Snake snake = new();
     private Timer gameTimer;
+    public bool first = true;
 
     public void Start()
     {
         gameTimer = new Timer(170);
-        gameTimer.Elapsed += (_, _) => { GameLoop(); };
+        gameTimer.Elapsed += (_, _) =>
+        {
+            GameLoop();
+        };
         gameTimer.Start();
     }
     private bool IsOpposite(Direction currentDir, Direction newDir)
@@ -41,7 +45,9 @@ public class GameLogic
     private void GameLoop()
     {
         Console.Clear();
+        IsEating();
         renderer.Border(board.Border);
+        renderer.Apple(board.Apple);
         snake.Move();
         Checks();
         renderer.SnakeHead(snake.Head);
@@ -68,5 +74,14 @@ public class GameLogic
         gameTimer.Dispose();
         Console.WriteLine("Game Over!");
         
+    }
+
+    private void IsEating()
+    {
+        if (first)
+        {
+            board.SpawnApple(snake.Head, snake.Body);
+            first = false;
+        }
     }
 }

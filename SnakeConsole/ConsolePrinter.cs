@@ -30,4 +30,11 @@ public class ConsolePrinter : IGameRenderer
         Console.SetCursorPosition(head.X, head.Y);
         Console.Write("0");
     }
+    
+    public void Apple(Position apple)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.SetCursorPosition(apple.X, apple.Y);
+        Console.Write("@");
+    }
 }
