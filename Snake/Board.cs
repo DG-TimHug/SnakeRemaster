@@ -25,7 +25,7 @@ public class Board
         }
     }
 
-    public bool IsPosOnBorder(Position pos)
+    public bool IsPositionOnBorder(Position pos)
     {
         return Border.Contains(pos);
     }

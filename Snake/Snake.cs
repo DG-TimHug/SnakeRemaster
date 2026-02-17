@@ -4,23 +4,15 @@ public class Snake
 {
     public Snake()
     {
-        SetInitialLength();
-    }
-    public readonly List<Position> Body = new();
-    public Position Head { get; set;} = new (5,4);
-    public Position RemovedTail { get; set; }
-    public Direction CurrentDirection { get; set; } = Direction.Right;
-
-    private void SetInitialLength()
-    {
-        Body.Clear();
-
         Body.Add(new Position(4, 4));
         Body.Add(new Position(3, 4));
         Body.Add(new Position(2, 4));
         Body.Add(new Position(1, 4));
     }
-    
+    public readonly List<Position> Body = new();
+    public Position Head { get; set;} = new (5,4);
+    public Position RemovedTail { get; set; }
+    public Direction CurrentDirection { get; set; } = Direction.Right;
     
     public void Move()
     {
@@ -41,6 +33,7 @@ public class Snake
 
         Body.RemoveAt(Body.Count - 1);
     }
+    
     public bool IsSnakeInSelf(Position pos)
     {
         return Body.Contains(pos);
@@ -53,5 +46,4 @@ public enum Direction
     Right,
     Up,
     Down
-    
 }
