@@ -9,7 +9,7 @@ public class ConsolePrinter : IGameRenderer
         foreach (var position in border)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.SetCursorPosition(position.Y, position.X);
+            Console.SetCursorPosition(position.X, position.Y);
             Console.Write("#");
         }
     }
