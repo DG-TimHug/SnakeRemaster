@@ -13,17 +13,18 @@ public class GameLogic
     private readonly Board board;
     private readonly Snake snake = new();
     private Timer gameTimer;
-    public bool first = true;
+    private bool first = true;
+    private bool isEating = false;  
 
     public void Start()
     {
+        board.SpawnApple(snake.Head, snake.Body);
+
         gameTimer = new Timer(170);
-        gameTimer.Elapsed += (_, _) =>
-        {
-            GameLoop();
-        };
+        gameTimer.Elapsed += (_, _) => GameLoop();
         gameTimer.Start();
     }
+
     private bool IsOpposite(Direction currentDir, Direction newDir)
     {
         return (currentDir == Direction.Left && newDir == Direction.Right) ||
@@ -45,14 +46,20 @@ public class GameLogic
     private void GameLoop()
     {
         Console.Clear();
-        IsEating();
-        renderer.Border(board.Border);
-        renderer.Apple(board.Apple);
         snake.Move();
         Checks();
+        snake.Grow(isEating);
+        if (isEating)
+        {
+            board.SpawnApple(snake.Head, snake.Body);
+            isEating = false;
+        }
+        renderer.Border(board.Border);
+        renderer.Apple(board.Apple);
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body.ToList());
     }
+
     
     private void Checks()
     {
@@ -67,6 +74,11 @@ public class GameLogic
             EndGame();
             Console.WriteLine("Collision with Border");
         }
+
+        if (board.Apple == snake.Head)
+        {
+            isEating = true;
+        }
     }
 
     private void EndGame()
@@ -74,14 +86,5 @@ public class GameLogic
         gameTimer.Dispose();
         Console.WriteLine("Game Over!");
         
-    }
-
-    private void IsEating()
-    {
-        if (first)
-        {
-            board.SpawnApple(snake.Head, snake.Body);
-            first = false;
-        }
     }
 }

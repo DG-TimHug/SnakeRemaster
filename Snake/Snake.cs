@@ -29,22 +29,34 @@ public class Snake
         Head = CurrentDirection switch
         {
             Direction.Right => new Position(Head.X + 1, Head.Y),
-            Direction.Up => new Position(Head.X, Head.Y - 1),
-            Direction.Left => new Position(Head.X - 1, Head.Y), 
-            Direction.Down => new Position(Head.X, Head.Y + 1),
-            _ => new Position(Head.X + 1, Head.Y)
+            Direction.Up    => new Position(Head.X, Head.Y - 1),
+            Direction.Left  => new Position(Head.X - 1, Head.Y),
+            Direction.Down  => new Position(Head.X, Head.Y + 1),
+            _               => Head
         };
 
         Body.Insert(0, oldHead);
-        
-        RemovedTail = Body[^1];
-
-        Body.RemoveAt(Body.Count - 1);
     }
+    
     public bool IsSnakeInSelf(Position pos)
     {
         return Body.Contains(pos);
     }
+
+    public void Grow(bool ateApple)
+    {
+        if (!ateApple && Body.Count > 0)
+        {
+            RemovedTail = Body[^1];
+            Body.RemoveAt(Body.Count - 1);
+        }
+        else
+        {
+            RemovedTail = null;
+        }
+    }
+
+
 }
 
 public enum Direction
