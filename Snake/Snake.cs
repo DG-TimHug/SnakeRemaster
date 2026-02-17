@@ -4,27 +4,19 @@ public class Snake
 {
     public Snake()
     {
-        SetInitialLength();
-    }
-    public readonly List<Position> Body = new();
-    public Position Head { get; set;} = new (5,4);
-    public Position RemovedTail { get; set; }
-    public Direction CurrentDirection { get; set; } = Direction.Right;
-
-    private void SetInitialLength()
-    {
-        Body.Clear();
-
         Body.Add(new Position(4, 4));
         Body.Add(new Position(3, 4));
         Body.Add(new Position(2, 4));
         Body.Add(new Position(1, 4));
     }
-    
+    public readonly List<Position> Body = new();
+    public Position Head { get; set;} = new (5,4);
+    public Position RemovedTail { get; set; }
+    public Direction CurrentDirection { get; set; } = Direction.Right;
     
     public void Move()
     {
-        Position oldHead = Head;
+        var oldHead = Head;
 
         Head = CurrentDirection switch
         {
@@ -43,9 +35,10 @@ public class Snake
         return Body.Contains(pos);
     }
 
-    public void Grow(bool ateApple)
+    public void Grow()
     {
-        if (!ateApple && Body.Count > 0)
+        // TODO: Evtl. Weiter kürzen
+        if (Body.Count > 0)
         {
             RemovedTail = Body[^1];
             Body.RemoveAt(Body.Count - 1);
@@ -55,7 +48,6 @@ public class Snake
             RemovedTail = null;
         }
     }
-
 
 }
 

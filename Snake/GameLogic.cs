@@ -13,12 +13,11 @@ public class GameLogic
     private readonly Board board;
     private readonly Snake snake = new();
     private Timer gameTimer;
-    private bool first = true;
-    private bool isEating = false;  
+    private bool isEating;  
 
     public void Start()
     {
-        board.SpawnApple(snake.Head, snake.Body);
+        board.SpawnApple(snake);
 
         gameTimer = new Timer(170);
         gameTimer.Elapsed += (_, _) => GameLoop();
@@ -47,29 +46,14 @@ public class GameLogic
     {
         Console.Clear();
         snake.Move();
-        Checks();
-        snake.Grow(isEating);
-        if (isEating)
-        {
-            board.SpawnApple(snake.Head, snake.Body);
-            isEating = false;
-        }
-        renderer.Border(board.Border);
-        renderer.Apple(board.Apple);
-        renderer.SnakeHead(snake.Head);
-        renderer.SnakeBody(snake.Body.ToList());
-    }
-
-    
-    private void Checks()
-    {
+        
         if (snake.IsSnakeInSelf(snake.Head))
         {
             EndGame();
             Console.WriteLine("Collision with self");
         }
 
-        if (board.IsPosOnBorder(snake.Head))
+        if (board.IsPositionOnBorder(snake.Head))
         {
             EndGame();
             Console.WriteLine("Collision with Border");
@@ -79,6 +63,14 @@ public class GameLogic
         {
             isEating = true;
         }
+        
+        snake.Grow();
+        if (isEating)
+        {
+            board.SpawnApple(snake);
+            isEating = false;
+        }
+        Render();
     }
 
     private void EndGame()
@@ -86,5 +78,13 @@ public class GameLogic
         gameTimer.Dispose();
         Console.WriteLine("Game Over!");
         
+    }
+
+    private void Render()
+    {
+        renderer.Border(board.Border);
+        renderer.Apple(board.Apple);
+        renderer.SnakeHead(snake.Head);
+        renderer.SnakeBody(snake.Body.ToList());
     }
 }

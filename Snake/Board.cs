@@ -14,13 +14,15 @@ public class Board
     private readonly Random random = new();
 
     public readonly List<Position> Border = new();
+    
+    public Position Apple;
 
     private void CalculateBorder()
     {
         // TODO: More efficient way of calculating border
-        for (int row = 0; row < height; row++)
+        for (var row = 0; row < height; row++)
         {
-            for (int col = 0; col < width; col++)
+            for (var col = 0; col < width; col++)
             {
                 if (row == 0 || row == height - 1 || col == 0 || col == width - 1)
                 {
@@ -30,32 +32,33 @@ public class Board
         }
     }
 
-    public bool IsPosOnBorder(Position pos)
+    public bool IsPositionOnBorder(Position pos)
     {
         return Border.Contains(pos);
     }
 
-    public Position Apple;
-
-    public void SpawnApple(Position head, List<Position> body)
+    public void SpawnApple(Snake snake)
     {
-        if (!IsPosOnBorder(Apple))
+        Position newApple;
+        do
         {
-            Position newApple;
-            do
+            if (!IsPositionOnBorder(Apple))
             {
                 newApple = new Position(
                     random.Next(1, width - 1),
                     random.Next(1, height - 1)
                 );
             }
-            while 
-            (
-                newApple == head || body.Contains(newApple)
-            );
+            else
+            {
+                return;
+            }
+            
+        } while
+        (
+            newApple == snake.Head || snake.Body.Contains(newApple)
+        );
 
-            Apple = newApple;
-
-        }
+        Apple = newApple;
     }
 }
