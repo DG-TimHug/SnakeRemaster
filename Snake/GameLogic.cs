@@ -23,13 +23,12 @@ public class GameLogic
         gameTimer.Elapsed += (_, _) => GameLoop();
         gameTimer.Start();
     }
-
-    private bool IsOpposite(Direction currentDir, Direction newDir)
+    private bool IsOpposite(Direction currentDirection, Direction newDirection)
     {
-        return (currentDir == Direction.Left && newDir == Direction.Right) ||
-               (currentDir == Direction.Right && newDir == Direction.Left) ||
-               (currentDir == Direction.Up && newDir == Direction.Down) ||
-               (currentDir == Direction.Down && newDir == Direction.Up);
+        return (currentDirection == Direction.Left && newDirection == Direction.Right) ||
+               (currentDirection == Direction.Right && newDirection == Direction.Left) ||
+               (currentDirection == Direction.Up && newDirection == Direction.Down) ||
+               (currentDirection == Direction.Down && newDirection == Direction.Up);
     }
     
     public void SetDirection(Direction dir)
@@ -72,7 +71,7 @@ public class GameLogic
         }
         Render();
     }
-
+    
     private void EndGame()
     {
         gameTimer.Dispose();
