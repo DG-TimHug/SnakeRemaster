@@ -42,7 +42,7 @@ public class Board
         Position newApple;
         do
         {
-            if (!IsPositionOnBorder(Apple))
+            if (!IsPositionOnBorder(Apple) || !snake.IsPositionInSnake(Apple))
             {
                 newApple = new Position(
                     random.Next(1, width - 1),

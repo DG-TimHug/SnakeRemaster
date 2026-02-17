@@ -30,10 +30,12 @@ public class Snake
         Body.Insert(0, oldHead);
     }
     
-    public bool IsSnakeInSelf(Position pos)
+    public bool IsPositionInSnake(Position pos)
     {
         return Body.Contains(pos);
     }
+    
+    
 
     public void Grow()
     {
