@@ -13,7 +13,6 @@ public class GameLogic
     private readonly Board board;
     private readonly Snake snake = new();
     private Timer gameTimer;
-    private bool isEating;  
 
     public void Start()
     {
@@ -58,17 +57,12 @@ public class GameLogic
             Console.WriteLine("Collision with Border");
         }
 
-        if (board.Apple == snake.Head)
+        if (snake.IsEating(board.Apple))
         {
-            isEating = true;
+            board.SpawnApple(snake);
         }
         
         snake.Grow();
-        if (isEating)
-        {
-            board.SpawnApple(snake);
-            isEating = false;
-        }
         Render();
     }
     
