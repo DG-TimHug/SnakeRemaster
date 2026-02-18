@@ -5,14 +5,14 @@ public class Snake
     public Snake()
     {
         Body.Add(new Position(4, 4));
-        //Body.Add(new Position(3, 4));
+        Body.Add(new Position(3, 4));
         //Body.Add(new Position(2, 4));
         //Body.Add(new Position(1, 4));
     }
 
     public readonly List<Position> Body = new();
-    public Position Head { get; set; } = new(5, 4);
-    public Position RemovedTail { get; set; }
+    public Position Head { get; private set; } = new(5, 4);
+    private Position RemovedTail { get; set; }
     public Direction CurrentDirection { get; set; } = Direction.Right;
 
     public void Move()
@@ -31,7 +31,7 @@ public class Snake
         Body.Insert(0, oldHead);
 
         RemovedTail = Body[^1];
-        Body.RemoveAt(Body.Count -1 );
+        Body.RemoveAt(Body.Count - 1);
     }
 
     public bool IsEatingSelf()
@@ -46,10 +46,7 @@ public class Snake
 
     internal void Grow()
     {
-        if (RemovedTail != null)
-        {
-            Body.Add(RemovedTail);
-        }
+        Body.Add(RemovedTail);
     }
 
     public bool IsEating(Position apple)

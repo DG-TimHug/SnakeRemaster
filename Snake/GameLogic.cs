@@ -67,7 +67,7 @@ public class GameLogic
             board.SpawnApple(snake);
             snake.Grow();
         }
-        
+
         Render();
     }
 

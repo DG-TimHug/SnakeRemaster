@@ -45,6 +45,5 @@ public class ConsolePrinter : IGameRenderer
             Console.SetCursorPosition(part.X, part.Y);
             Console.Write(" ");
         }
-        
     }
 }
