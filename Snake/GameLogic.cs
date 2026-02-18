@@ -8,12 +8,17 @@ public class GameLogic
     {
         this.renderer = renderer;
         board = new Board(height, width);
+        GameLogic.height = height;
+        GameLogic.width = width;
     }
 
+    private static int height;
+    private static int width;
     private readonly IGameRenderer renderer;
     private readonly Board board;
     private readonly Snake snake = new();
     private Timer gameTimer;
+    private Position LevelCounter { get; set; } = new(width, height + 20);
 
     public void Start()
     {
@@ -76,7 +81,7 @@ public class GameLogic
         gameTimer.Dispose();
         Console.Clear();
         Console.WriteLine("Game Over!");
-        Console.WriteLine($"Your Snake was {snake.Body.Count} parts long!");
+        Console.WriteLine($"You got to Level {snake.Body.Count}. Good Job!");
     }
 
     private void Render()
@@ -84,5 +89,6 @@ public class GameLogic
         renderer.Apple(board.Apple);
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body.ToList());
+        renderer.Level(LevelCounter, snake.Body.Count);
     }
 }

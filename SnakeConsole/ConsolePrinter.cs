@@ -37,6 +37,13 @@ public class ConsolePrinter : IGameRenderer
         Console.SetCursorPosition(apple.X, apple.Y);
         Console.Write("@");
     }
+    
+    public void Level(Position levelPosition, int level)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.SetCursorPosition(levelPosition.X, levelPosition.Y);
+        Console.Write($"Your current level is {level}.");
+    }
 
     public void ClearSnake(Snake.Snake snake)
     {

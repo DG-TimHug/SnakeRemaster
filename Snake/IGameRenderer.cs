@@ -6,5 +6,6 @@ public interface IGameRenderer
     void SnakeBody(List<Position> body);
     void SnakeHead(Position head);
     void Apple(Position apple);
-    public void ClearSnake(Snake snake);
+    void ClearSnake(Snake snake);
+    void Level(Position levelPosition, int level);
 }
