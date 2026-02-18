@@ -9,8 +9,8 @@ public class Board
         CalculateBorder();
     }
 
-    private int height;
-    private int width;
+    private readonly int height;
+    private readonly int width;
     private readonly Random random = new();
 
     public readonly List<Position> Border = new();

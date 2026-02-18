@@ -14,8 +14,8 @@ internal abstract class SnakeConsole
     private static void StartGame()
     {
         Console.CursorVisible = false;
-        var height = 20;
-        var width = 40;
+        const int height = 20;
+        const int width = 40;
         var logic = new GameLogic(Printer, height, width);
         logic.Start();
 

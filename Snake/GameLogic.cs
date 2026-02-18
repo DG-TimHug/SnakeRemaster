@@ -17,7 +17,7 @@ public class GameLogic
     private readonly IGameRenderer renderer;
     private readonly Board board;
     private readonly Snake snake = new();
-    private Timer gameTimer;
+    private Timer? gameTimer;
     private Position LevelCounter { get; set; } = new(width, height + 20);
 
     public void Start()
