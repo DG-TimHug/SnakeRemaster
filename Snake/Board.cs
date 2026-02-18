@@ -14,7 +14,7 @@ public class Board
     private readonly Random random = new();
 
     public readonly List<Position> Border = new();
-    
+
     public Position Apple;
 
     private void CalculateBorder()
@@ -42,14 +42,8 @@ public class Board
         Position newApple;
         do
         {
-            newApple = new Position(
-                random.Next(1, width - 1),
-                random.Next(1, height - 1)
-            );
-        } while
-        (
-            IsPositionOnBorder(newApple) || snake.IsPositionOnSnake(newApple)
-        );
+            newApple = new Position(random.Next(1, width - 1), random.Next(1, height - 1));
+        } while (IsPositionOnBorder(newApple) || snake.IsPositionOnSnake(newApple));
 
         Apple = newApple;
     }

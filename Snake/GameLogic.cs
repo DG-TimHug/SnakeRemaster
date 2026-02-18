@@ -1,4 +1,5 @@
 using Timer = System.Timers.Timer;
+
 namespace Snake;
 
 public class GameLogic
@@ -22,14 +23,15 @@ public class GameLogic
         gameTimer.Elapsed += (_, _) => GameLoop();
         gameTimer.Start();
     }
+
     private bool IsOpposite(Direction currentDirection, Direction newDirection)
     {
-        return (currentDirection == Direction.Left && newDirection == Direction.Right) ||
-               (currentDirection == Direction.Right && newDirection == Direction.Left) ||
-               (currentDirection == Direction.Up && newDirection == Direction.Down) ||
-               (currentDirection == Direction.Down && newDirection == Direction.Up);
+        return (currentDirection == Direction.Left && newDirection == Direction.Right)
+            || (currentDirection == Direction.Right && newDirection == Direction.Left)
+            || (currentDirection == Direction.Up && newDirection == Direction.Down)
+            || (currentDirection == Direction.Down && newDirection == Direction.Up);
     }
-    
+
     public void SetDirection(Direction dir)
     {
         if (IsOpposite(snake.CurrentDirection, dir))
@@ -44,7 +46,7 @@ public class GameLogic
     {
         Console.Clear();
         snake.Move();
-        
+
         if (snake.IsEatingSelf())
         {
             EndGame();
@@ -61,16 +63,15 @@ public class GameLogic
         {
             board.SpawnApple(snake);
         }
-        
+
         snake.Grow();
         Render();
     }
-    
+
     private void EndGame()
     {
         gameTimer.Dispose();
         Console.WriteLine("Game Over!");
-        
     }
 
     private void Render()

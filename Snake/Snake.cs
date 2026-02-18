@@ -25,7 +25,7 @@ public class Snake
             Direction.Up => new Position(Head.X, Head.Y - 1),
             Direction.Left => new Position(Head.X - 1, Head.Y),
             Direction.Down => new Position(Head.X, Head.Y + 1),
-            _ => Head
+            _ => Head,
         };
 
         Body.Insert(0, oldHead);
@@ -66,5 +66,5 @@ public enum Direction
     Left,
     Right,
     Up,
-    Down
+    Down,
 }

@@ -18,7 +18,7 @@ internal abstract class SnakeConsole
         var width = 40;
         var logic = new GameLogic(Printer, height, width);
         logic.Start();
-        
+
         while (true)
         {
             if (Console.KeyAvailable)
@@ -31,15 +31,14 @@ internal abstract class SnakeConsole
                     ConsoleKey.A => Direction.Left,
                     ConsoleKey.S => Direction.Down,
                     ConsoleKey.D => Direction.Right,
-                    _ => (Direction?)null
+                    _ => (Direction?)null,
                 };
 
                 if (dir.HasValue)
                 {
-                     logic.SetDirection(dir.Value);
+                    logic.SetDirection(dir.Value);
                 }
             }
-
         }
     }
 }
