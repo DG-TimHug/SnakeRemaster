@@ -76,6 +76,7 @@ public class GameLogic
         gameTimer.Dispose();
         Console.Clear();
         Console.WriteLine("Game Over!");
+        Console.WriteLine($"Your Snake was {snake.Body.Count} parts long!");
     }
 
     private void Render()

@@ -5,9 +5,9 @@ public class Snake
     public Snake()
     {
         Body.Add(new Position(4, 4));
-        Body.Add(new Position(3, 4));
-        Body.Add(new Position(2, 4));
-        Body.Add(new Position(1, 4));
+        //Body.Add(new Position(3, 4));
+        //Body.Add(new Position(2, 4));
+        //Body.Add(new Position(1, 4));
     }
 
     public readonly List<Position> Body = new();
@@ -29,6 +29,9 @@ public class Snake
         };
 
         Body.Insert(0, oldHead);
+
+        RemovedTail = Body[^1];
+        Body.RemoveAt(Body.Count -1 );
     }
 
     public bool IsEatingSelf()
@@ -43,15 +46,9 @@ public class Snake
 
     internal void Grow()
     {
-        // TODO: Evtl. Weiter kürzen
-        if (Body.Count > 0)
+        if (RemovedTail != null)
         {
-            RemovedTail = Body[^1];
-            Body.RemoveAt(Body.Count - 1);
-        }
-        else
-        {
-            RemovedTail = null;
+            Body.Add(RemovedTail);
         }
     }
 

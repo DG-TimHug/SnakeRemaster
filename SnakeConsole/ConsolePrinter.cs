@@ -18,7 +18,7 @@ public class ConsolePrinter : IGameRenderer
     {
         foreach (var position in body)
         {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(position.X, position.Y);
             Console.Write("o");
         }
