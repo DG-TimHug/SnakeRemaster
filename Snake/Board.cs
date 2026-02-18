@@ -42,21 +42,13 @@ public class Board
         Position newApple;
         do
         {
-            if (!IsPositionOnBorder(Apple) || !snake.IsPositionInSnake(Apple))
-            {
-                newApple = new Position(
-                    random.Next(1, width - 1),
-                    random.Next(1, height - 1)
-                );
-            }
-            else
-            {
-                return;
-            }
-            
+            newApple = new Position(
+                random.Next(1, width - 1),
+                random.Next(1, height - 1)
+            );
         } while
         (
-            newApple == snake.Head || snake.Body.Contains(newApple)
+            IsPositionOnBorder(newApple) || newApple == snake.Head || snake.Body.Contains(newApple)
         );
 
         Apple = newApple;
