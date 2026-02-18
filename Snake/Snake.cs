@@ -9,41 +9,62 @@ public class Snake
         Body.Add(new Position(2, 4));
         Body.Add(new Position(1, 4));
     }
+
     public readonly List<Position> Body = new();
-    public Position Head { get; set;} = new (5,4);
+    public Position Head { get; set; } = new(5, 4);
     public Position RemovedTail { get; set; }
     public Direction CurrentDirection { get; set; } = Direction.Right;
-    
+
     public void Move()
     {
-        Position oldHead = Head;
+        var oldHead = Head;
 
         Head = CurrentDirection switch
         {
             Direction.Right => new Position(Head.X + 1, Head.Y),
             Direction.Up => new Position(Head.X, Head.Y - 1),
-            Direction.Left => new Position(Head.X - 1, Head.Y), 
+            Direction.Left => new Position(Head.X - 1, Head.Y),
             Direction.Down => new Position(Head.X, Head.Y + 1),
-            _ => new Position(Head.X + 1, Head.Y)
+            _ => Head,
         };
 
         Body.Insert(0, oldHead);
-        
-        RemovedTail = Body[^1];
-
-        Body.RemoveAt(Body.Count - 1);
     }
-    
-    public bool IsSnakeInSelf(Position pos)
+
+    public bool IsEatingSelf()
     {
-        return Body.Contains(pos);
+        return Body.Contains(Head);
+    }
+
+    public bool IsPositionOnSnake(Position pos)
+    {
+        return Body.Contains(pos) || Head == pos;
+    }
+
+    public void Grow()
+    {
+        // TODO: Evtl. Weiter kürzen
+        if (Body.Count > 0)
+        {
+            RemovedTail = Body[^1];
+            Body.RemoveAt(Body.Count - 1);
+        }
+        else
+        {
+            RemovedTail = null;
+        }
+    }
+
+    public bool IsEating(Position apple)
+    {
+        return Head == apple;
     }
 }
 
 public enum Direction
 {
-    Left,   
+    Left,
     Right,
     Up,
-    Down
+    Down,
 }

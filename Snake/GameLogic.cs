@@ -1,4 +1,5 @@
 using Timer = System.Timers.Timer;
+
 namespace Snake;
 
 public class GameLogic
@@ -16,18 +17,21 @@ public class GameLogic
 
     public void Start()
     {
+        board.SpawnApple(snake);
+
         gameTimer = new Timer(170);
-        gameTimer.Elapsed += (_, _) => { GameLoop(); };
+        gameTimer.Elapsed += (_, _) => GameLoop();
         gameTimer.Start();
     }
+
     private bool IsOpposite(Direction currentDirection, Direction newDirection)
     {
-        return (currentDirection == Direction.Left && newDirection == Direction.Right) ||
-               (currentDirection == Direction.Right && newDirection == Direction.Left) ||
-               (currentDirection == Direction.Up && newDirection == Direction.Down) ||
-               (currentDirection == Direction.Down && newDirection == Direction.Up);
+        return (currentDirection == Direction.Left && newDirection == Direction.Right)
+            || (currentDirection == Direction.Right && newDirection == Direction.Left)
+            || (currentDirection == Direction.Up && newDirection == Direction.Down)
+            || (currentDirection == Direction.Down && newDirection == Direction.Up);
     }
-    
+
     public void SetDirection(Direction dir)
     {
         if (IsOpposite(snake.CurrentDirection, dir))
@@ -41,10 +45,9 @@ public class GameLogic
     private void GameLoop()
     {
         Console.Clear();
-        renderer.Border(board.Border);
         snake.Move();
-        
-        if (snake.IsSnakeInSelf(snake.Head))
+
+        if (snake.IsEatingSelf())
         {
             EndGame();
             Console.WriteLine("Collision with self");
@@ -55,14 +58,27 @@ public class GameLogic
             EndGame();
             Console.WriteLine("Collision with Border");
         }
-        renderer.SnakeHead(snake.Head);
-        renderer.SnakeBody(snake.Body.ToList());
+
+        if (snake.IsEating(board.Apple))
+        {
+            board.SpawnApple(snake);
+        }
+
+        snake.Grow();
+        Render();
     }
-    
+
     private void EndGame()
     {
         gameTimer.Dispose();
         Console.WriteLine("Game Over!");
-        
+    }
+
+    private void Render()
+    {
+        renderer.Border(board.Border);
+        renderer.Apple(board.Apple);
+        renderer.SnakeHead(snake.Head);
+        renderer.SnakeBody(snake.Body.ToList());
     }
 }
