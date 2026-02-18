@@ -18,7 +18,7 @@ public class ConsolePrinter : IGameRenderer
     {
         foreach (var position in body)
         {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(position.X, position.Y);
             Console.Write("o");
         }
@@ -36,5 +36,15 @@ public class ConsolePrinter : IGameRenderer
         Console.ForegroundColor = ConsoleColor.Red;
         Console.SetCursorPosition(apple.X, apple.Y);
         Console.Write("@");
+    }
+
+    public void ClearSnake(Snake.Snake snake)
+    {
+        foreach (var part in snake.Body)
+        {
+            Console.SetCursorPosition(part.X, part.Y);
+            Console.Write(" ");
+        }
+        
     }
 }

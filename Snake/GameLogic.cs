@@ -18,6 +18,7 @@ public class GameLogic
     public void Start()
     {
         board.SpawnApple(snake);
+        renderer.Border(board.Border);
 
         gameTimer = new Timer(170);
         gameTimer.Elapsed += (_, _) => GameLoop();
@@ -44,39 +45,42 @@ public class GameLogic
 
     private void GameLoop()
     {
-        Console.Clear();
+        renderer.ClearSnake(snake);
         snake.Move();
 
         if (snake.IsEatingSelf())
         {
             EndGame();
             Console.WriteLine("Collision with self");
+            Environment.Exit(-1);
         }
 
         if (board.IsPositionOnBorder(snake.Head))
         {
             EndGame();
             Console.WriteLine("Collision with Border");
+            Environment.Exit(-1);
         }
 
         if (snake.IsEating(board.Apple))
         {
             board.SpawnApple(snake);
+            snake.Grow();
         }
-
-        snake.Grow();
+        
         Render();
     }
 
     private void EndGame()
     {
         gameTimer.Dispose();
+        Console.Clear();
         Console.WriteLine("Game Over!");
+        Console.WriteLine($"Your Snake was {snake.Body.Count} parts long!");
     }
 
     private void Render()
     {
-        renderer.Border(board.Border);
         renderer.Apple(board.Apple);
         renderer.SnakeHead(snake.Head);
         renderer.SnakeBody(snake.Body.ToList());
