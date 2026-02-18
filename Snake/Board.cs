@@ -48,7 +48,7 @@ public class Board
             );
         } while
         (
-            IsPositionOnBorder(newApple) || newApple == snake.Head || snake.Body.Contains(newApple)
+            IsPositionOnBorder(newApple) || snake.IsPositionOnSnake(newApple)
         );
 
         Apple = newApple;

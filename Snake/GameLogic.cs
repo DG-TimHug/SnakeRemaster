@@ -46,7 +46,7 @@ public class GameLogic
         Console.Clear();
         snake.Move();
         
-        if (snake.IsPositionInSnake(snake.Head))
+        if (snake.IsEatingSelf())
         {
             EndGame();
             Console.WriteLine("Collision with self");
