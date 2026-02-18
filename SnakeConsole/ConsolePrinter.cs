@@ -37,4 +37,14 @@ public class ConsolePrinter : IGameRenderer
         Console.SetCursorPosition(apple.X, apple.Y);
         Console.Write("@");
     }
+
+    public void ClearSnake(Snake.Snake snake)
+    {
+        foreach (var part in snake.Body)
+        {
+            Console.SetCursorPosition(part.X, part.Y);
+            Console.Write(" ");
+        }
+        
+    }
 }

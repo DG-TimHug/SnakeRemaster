@@ -41,7 +41,7 @@ public class Snake
         return Body.Contains(pos) || Head == pos;
     }
 
-    public void Grow()
+    internal void Grow()
     {
         // TODO: Evtl. Weiter kürzen
         if (Body.Count > 0)
